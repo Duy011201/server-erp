@@ -10,16 +10,17 @@ const constant = {
   code: {
     OK: 200,
     NOT_FOUND: 404,
-    SERVER_ERROR: 500
+    SERVER_ERROR: 500,
+  },
+  statusStore: {
+    EMPTY: "Empty",
+    FULL: "Full",
+    IN_USE: "In Use",
   },
   tableNameBD: {
-    ROLES: "roles",
-    COMMENTS: "comments",
-    PRODUCTS: "products",
-  },
-  commentStatus: {
-    PENDING: "pending",
-    APPROVED: "approved",
+    ROLES: "phanquyen",
+    STORES: "kho",
+    PRODUCTS: "sanpham",
   },
 };
 
