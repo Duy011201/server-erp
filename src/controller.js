@@ -66,3 +66,64 @@ export const updateStoreByID = (req, res) => {
     updateColumns
   );
 };
+
+// Product
+export const getAllProduct = (req, res) => {
+  const queryCondition = `SELECT pd.maSP as id, pd.tenSP, pd.loaiSP, pd.donViTinh, pd.soLuong, pd.maKho, pd.gia FROM ${constant.tableNameBD.PRODUCTS} as pd`;
+  let querySearch = "";
+
+  return getAll(
+    res,
+    constant.tableNameBD.PRODUCTS,
+    queryCondition,
+    querySearch
+  );
+};
+
+export const getProductByID = (req, res) => {
+  const queryCondition = "";
+  return getByID(req, res, constant.tableNameBD.PRODUCTS, queryCondition);
+};
+
+export const deleteProductByID = (req, res) => {
+  const deleteColumns = {
+    maKho: req.query.id,
+  };
+  return deleteByID(req, res, constant.tableNameBD.PRODUCTS, deleteColumns);
+};
+
+export const createProduct = (req, res) => {
+  const newProduct = {
+    tenSP: req.body.tenSP,
+    loaiSP: req.body.loaiSP,
+    donViTinh: req.body.donViTinh,
+    soLuong: req.body.soLuong,
+    gia: req.body.gia,
+    maKho: req.body.maKho,
+  };
+
+  return create(req, res, constant.tableNameBD.PRODUCTS, newProduct);
+};
+
+export const updateProductByID = (req, res) => {
+  const updateProduct = {
+    tenSP: req.body.tenSP,
+    loaiSP: req.body.loaiSP,
+    donViTinh: req.body.donViTinh,
+    soLuong: req.body.soLuong,
+    gia: req.body.gia,
+    maKho: req.body.maKho,
+  };
+
+  const updateColumns = {
+    maSP: req.body.id,
+  };
+
+  return update(
+    req,
+    res,
+    constant.tableNameBD.PRODUCTS,
+    updateProduct,
+    updateColumns
+  );
+};
