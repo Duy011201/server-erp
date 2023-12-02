@@ -10,6 +10,10 @@ import {
   updateProductByID,
   createProduct,
   getAllProduct,
+  deleteMaterialByID,
+  updateMaterialByID,
+  createMaterial,
+  getAllMaterial,
 } from "./controller.js";
 
 const router = express.Router();
@@ -29,5 +33,11 @@ router.post("/product/all", getAllProduct);
 router.post("/product/create", createProduct);
 router.post("/product/update", updateProductByID);
 router.post("/product/delete", deleteProductByID);
+
+// material
+router.post("/material/all", getAllMaterial);
+router.post("/material/create", createMaterial);
+router.post("/material/update", updateMaterialByID);
+router.post("/material/delete", deleteMaterialByID);
 
 export default router;

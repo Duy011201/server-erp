@@ -127,3 +127,62 @@ export const updateProductByID = (req, res) => {
     updateColumns
   );
 };
+
+// Material
+export const getAllMaterial = (req, res) => {
+  const queryCondition = `SELECT mt.maNVL as id, mt.tenNVL, mt.donViTinh, mt.soLuong, mt.maKho, mt.gia FROM ${constant.tableNameBD.MATERIALS} as mt`;
+  let querySearch = "";
+
+  return getAll(
+    res,
+    constant.tableNameBD.MATERIALS,
+    queryCondition,
+    querySearch
+  );
+};
+
+export const getMaterialByID = (req, res) => {
+  const queryCondition = "";
+  return getByID(req, res, constant.tableNameBD.MATERIALS, queryCondition);
+};
+
+export const deleteMaterialByID = (req, res) => {
+  const deleteColumns = {
+    maKho: req.query.id,
+  };
+  return deleteByID(req, res, constant.tableNameBD.MATERIALS, deleteColumns);
+};
+
+export const createMaterial = (req, res) => {
+  const newMaterial = {
+    tenNVL: req.body.tenNVL,
+    donViTinh: req.body.donViTinh,
+    soLuong: req.body.soLuong,
+    gia: req.body.gia,
+    maKho: req.body.maKho,
+  };
+
+  return create(req, res, constant.tableNameBD.MATERIALS, newMaterial);
+};
+
+export const updateMaterialByID = (req, res) => {
+  const updateMaterial = {
+    tenNVL: req.body.tenNVL,
+    donViTinh: req.body.donViTinh,
+    soLuong: req.body.soLuong,
+    gia: req.body.gia,
+    maKho: req.body.maKho,
+  };
+
+  const updateColumns = {
+    maNVL: req.body.id,
+  };
+
+  return update(
+    req,
+    res,
+    constant.tableNameBD.MATERIALS,
+    updateMaterial,
+    updateColumns
+  );
+};

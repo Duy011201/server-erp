@@ -21,6 +21,7 @@ const constant = {
     ROLES: "phanquyen",
     STORES: "kho",
     PRODUCTS: "sanpham",
+    MATERIALS: "nguyenvatlieu",
   },
 };
 
