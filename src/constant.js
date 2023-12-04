@@ -30,6 +30,7 @@ const constant = {
     WAREHOUSE_RECEIPTS: "phieunhap",
     WAREHOUSE_RECEIPT_DETAILS: "chitietphieunhap",
     ACCOUNT: "taikhoan",
+    EMPLOYEE: "nhanvien",
   },
 };
 

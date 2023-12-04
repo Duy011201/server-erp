@@ -26,6 +26,8 @@ import {
   checkLogin,
   register,
   createRegister,
+  getUserByID,
+  updateUserByID
 } from "./controller.js";
 
 const router = express.Router();
@@ -75,5 +77,7 @@ router.post("/auth/login", checkLogin);
 router.post("/auth/register", register);
 router.post("/auth/create-register", createRegister);
 router.post("/auth/update-password", updatePassword);
+router.post("/user", getUserByID);
+router.post("/user/update", updateUserByID);
 
 export default router;

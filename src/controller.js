@@ -391,3 +391,33 @@ export const updatePassword = (req, res) => {
     updateColumns
   );
 };
+
+// User
+export const getUserByID = (req, res) => {
+  const queryCondition = `SELECT nv.maNV as id, nv.hoTen, nv.soCCCD, nv.diaChi, nv.gioiTinh, nv.maChucVu, nv.maPhongBan FROM ${constant.tableNameBD.EMPLOYEE} as nv`;
+  return getByID(req, res, constant.tableNameBD.EMPLOYEE, queryCondition);
+};
+
+export const updateUserByID = (req, res) => {
+  const updateUser = {
+    hoTen: req.body.hoTen,
+    gioiTinh: req.body.gioiTinh,
+    ngaySinh: new Date(),
+    diaChi: req.body.diaChi,
+    soCCCD: req.body.soCCCD,
+    maChucVu: req.body.maChucVu,
+    maPhongBan: req.body.maPhongBan,
+  };
+
+  const updateColumns = {
+    maNV: req.body.id,
+  };
+
+  return update(
+    req,
+    res,
+    constant.tableNameBD.EMPLOYEE,
+    updateUser,
+    updateColumns
+  );
+};
