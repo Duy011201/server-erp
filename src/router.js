@@ -22,6 +22,10 @@ import {
   createWarehouseReceiptDetail,
   updateWarehouseReceiptDetailByID,
   deleteWarehouseReceiptDetailByID,
+  updatePassword,
+  checkLogin,
+  register,
+  createRegister,
 } from "./controller.js";
 
 const router = express.Router();
@@ -65,5 +69,11 @@ router.post(
   "/warehouse-receipt-detail/delete",
   deleteWarehouseReceiptDetailByID
 );
+
+// Auth
+router.post("/auth/login", checkLogin);
+router.post("/auth/register", register);
+router.post("/auth/create-register", createRegister);
+router.post("/auth/update-password", updatePassword);
 
 export default router;

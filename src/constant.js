@@ -17,6 +17,11 @@ const constant = {
     FULL: "Full",
     IN_USE: "In Use",
   },
+  role: {
+    EMPLOYEE: "employee",
+    MANAGER: "manager",
+    ADMIN: "admin",
+  },
   tableNameBD: {
     ROLES: "phanquyen",
     STORES: "kho",
@@ -24,6 +29,7 @@ const constant = {
     MATERIALS: "nguyenvatlieu",
     WAREHOUSE_RECEIPTS: "phieunhap",
     WAREHOUSE_RECEIPT_DETAILS: "chitietphieunhap",
+    ACCOUNT: "taikhoan",
   },
 };
 

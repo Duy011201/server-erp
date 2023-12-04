@@ -315,8 +315,6 @@ export const createWarehouseReceiptDetail = (req, res) => {
 };
 
 export const updateWarehouseReceiptDetailByID = (req, res) => {
-  console.log(req.body);
-
   const updateWarehouseReceiptDetail = {
     maPN: req.body.maPN,
     maSP: req.body.maSP,
@@ -334,6 +332,62 @@ export const updateWarehouseReceiptDetailByID = (req, res) => {
     res,
     constant.tableNameBD.WAREHOUSE_RECEIPT_DETAILS,
     updateWarehouseReceiptDetail,
+    updateColumns
+  );
+};
+
+// Auth
+export const checkLogin = (req, res) => {
+  const queryCondition =
+    `SELECT ac.maTK as id, ac.tenTK, ac.maQuyen, rl.quyen FROM ${constant.tableNameBD.ACCOUNT} as ac` +
+    ` INNER JOIN ${constant.tableNameBD.ROLES} as rl ON rl.maQuyen = ac.maQuyen`;
+
+  let querySearch = "";
+  if (req.body.email && req.body.email !== "") {
+    querySearch += ` WHERE ac.tenTK = '${req.body.email}'`;
+  }
+
+  if (req.body.password && req.body.password !== "") {
+    querySearch += ` AND ac.matKhau = '${req.body.password}'`;
+  }
+
+  return getAll(res, constant.tableNameBD.ACCOUNT, queryCondition, querySearch);
+};
+
+export const register = async (req, res) => {
+  const queryCondition = `SELECT * FROM ${constant.tableNameBD.ACCOUNT} as ac`;
+  let querySearch = "";
+  if (req.body.email && req.body.email !== "") {
+    querySearch += ` WHERE ac.tenTK = '${req.body.email}'`;
+  }
+
+  return getAll(res, constant.tableNameBD.ACCOUNT, queryCondition, querySearch);
+};
+
+export const createRegister = async (req, res) => {
+  const newUser = {
+    tenTK: req.body.email,
+    matKhau: req.body.password,
+    maQuyen: constant.role.EMPLOYEE,
+  };
+
+  return create(req, res, constant.tableNameBD.ACCOUNT, newUser);
+};
+
+export const updatePassword = (req, res) => {
+  const updateUser = {
+    matKhau: req.body.password,
+  };
+
+  const updateColumns = {
+    maTK: req.body.id,
+  };
+
+  return update(
+    req,
+    res,
+    constant.tableNameBD.ACCOUNT,
+    updateUser,
     updateColumns
   );
 };
