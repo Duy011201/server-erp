@@ -14,6 +14,14 @@ import {
   updateMaterialByID,
   createMaterial,
   getAllMaterial,
+  getAllWarehouseReceipt,
+  createWarehouseReceipt,
+  updateWarehouseReceiptByID,
+  deleteWarehouseReceiptByID,
+  getAllWarehouseReceiptDetail,
+  createWarehouseReceiptDetail,
+  updateWarehouseReceiptDetailByID,
+  deleteWarehouseReceiptDetailByID,
 } from "./controller.js";
 
 const router = express.Router();
@@ -39,5 +47,23 @@ router.post("/material/all", getAllMaterial);
 router.post("/material/create", createMaterial);
 router.post("/material/update", updateMaterialByID);
 router.post("/material/delete", deleteMaterialByID);
+
+// warehouse receipt
+router.post("/warehouse-receipt/all", getAllWarehouseReceipt);
+router.post("/warehouse-receipt/create", createWarehouseReceipt);
+router.post("/warehouse-receipt/update", updateWarehouseReceiptByID);
+router.post("/warehouse-receipt/delete", deleteWarehouseReceiptByID);
+
+// warehouse receipt details
+router.post("/warehouse-receipt-detail/all", getAllWarehouseReceiptDetail);
+router.post("/warehouse-receipt-detail/create", createWarehouseReceiptDetail);
+router.post(
+  "/warehouse-receipt-detail/update",
+  updateWarehouseReceiptDetailByID
+);
+router.post(
+  "/warehouse-receipt-detail/delete",
+  deleteWarehouseReceiptDetailByID
+);
 
 export default router;

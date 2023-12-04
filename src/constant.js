@@ -22,6 +22,8 @@ const constant = {
     STORES: "kho",
     PRODUCTS: "sanpham",
     MATERIALS: "nguyenvatlieu",
+    WAREHOUSE_RECEIPTS: "phieunhap",
+    WAREHOUSE_RECEIPT_DETAILS: "chitietphieunhap",
   },
 };
 
