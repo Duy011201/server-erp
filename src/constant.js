@@ -33,6 +33,7 @@ const constant = {
     EMPLOYEES: "nhanvien",
     DEPARTMENTS: "phongban",
     POSITIONS: "chucvu",
+    REWARD_DISCIPLINE: 'khenthuongkyluat'
   },
 };
 

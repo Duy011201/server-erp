@@ -33,6 +33,11 @@ import {
   getAllEmployee,
   getAllDepartment,
   getAllPosition,
+  deleteRewardDisciplineByID,
+  createRewardDiscipline,
+  updateRewardDisciplineByID,
+  getAllRewardDiscipline,
+  getRewardDisciplineByID,
 } from "./controller.js";
 
 const router = express.Router();
@@ -83,11 +88,19 @@ router.post("/auth/register", register);
 router.post("/auth/create-register", createRegister);
 router.post("/auth/update-password", updatePassword);
 
+// Employee
 router.post("/employee", getEmployeeByID);
 router.post("/employee/all", getAllEmployee);
 router.post("/employee/update", updateEmployeeByID);
 router.post("/employee/create", createEmployee);
 router.post("/employee/delete", deleteEmployeeByID);
+
+// Reward discipline
+router.post("/reward-discipline", getRewardDisciplineByID);
+router.post("/reward-discipline/all", getAllRewardDiscipline);
+router.post("/reward-discipline/update", updateRewardDisciplineByID);
+router.post("/reward-discipline/create", createRewardDiscipline);
+router.post("/reward-discipline/delete", deleteRewardDisciplineByID);
 
 // Position
 router.post("/position/all", getAllPosition);

@@ -465,6 +465,80 @@ export const getAllEmployee = (req, res) => {
   );
 };
 
+// RewardDiscipline
+export const getRewardDisciplineByID = (req, res) => {
+  const queryCondition = `SELECT ktkl.maKTKL as id,nv.hoTen, ktkl.maNV, ktkl.hinhThuc, ktkl.lyDo, ktkl.ngayKTKL FROM ${constant.tableNameBD.REWARD_DISCIPLINE} as ktkl`;
+  queryCondition += ` INNER JOIN ${constant.tableNameBD.EMPLOYEES} as nv ON nv.maNV = ktkl.maNV`;
+  return getByID(
+    req,
+    res,
+    constant.tableNameBD.REWARD_DISCIPLINE,
+    queryCondition
+  );
+};
+
+export const updateRewardDisciplineByID = (req, res) => {
+  const updateRewardDiscipline = {
+    maNV: req.body.maNV,
+    hinhThuc: req.body.hinhThuc,
+    lyDo: req.body.lyDo,
+    ngayKTKL: req.body.ngayKTKL,
+  };
+
+  const updateColumns = {
+    maKTKL: req.body.id,
+  };
+
+  return update(
+    req,
+    res,
+    constant.tableNameBD.REWARD_DISCIPLINE,
+    updateRewardDiscipline,
+    updateColumns
+  );
+};
+
+export const deleteRewardDisciplineByID = (req, res) => {
+  const deleteColumns = {
+    maKTKL: req.query.id,
+  };
+  return deleteByID(
+    req,
+    res,
+    constant.tableNameBD.REWARD_DISCIPLINE,
+    deleteColumns
+  );
+};
+
+export const createRewardDiscipline = (req, res) => {
+  const newRewardDiscipline = {
+    maNV: req.body.maNV,
+    hinhThuc: req.body.hinhThuc,
+    lyDo: req.body.lyDo,
+    ngayKTKL: req.body.ngayKTKL,
+  };
+
+  return create(
+    req,
+    res,
+    constant.tableNameBD.REWARD_DISCIPLINE,
+    newRewardDiscipline
+  );
+};
+
+export const getAllRewardDiscipline = (req, res) => {
+  let queryCondition = `SELECT ktkl.maKTKL as id, ktkl.maNV, ktkl.hinhThuc, ktkl.lyDo, ktkl.ngayKTKL, nv.hoTen FROM ${constant.tableNameBD.REWARD_DISCIPLINE} as ktkl`;
+  queryCondition += ` INNER JOIN ${constant.tableNameBD.EMPLOYEES} as nv ON nv.maNV = ktkl.maNV`;
+  let querySearch = "";
+
+  return getAll(
+    res,
+    constant.tableNameBD.REWARD_DISCIPLINE,
+    queryCondition,
+    querySearch
+  );
+};
+
 // Position
 export const getAllPosition = (req, res) => {
   const queryCondition = `SELECT dp.maChucVu as id, dp.tenChucVu , dp.trangThai, dp.maPhongBan FROM ${constant.tableNameBD.POSITIONS} as dp`;
