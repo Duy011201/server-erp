@@ -79,7 +79,6 @@ CREATE TABLE TaiKhoan
   tenTK NVARCHAR(255),
   matKhau NVARCHAR(255),
   maQuyen INT,
-  FOREIGN KEY (maNV) REFERENCES NhanVien(maNV),
   FOREIGN KEY (maQuyen) REFERENCES PhanQuyen(maQuyen)
 );
 
@@ -143,8 +142,6 @@ CREATE TABLE ChiTietPhieuNhap
   soLuong INT,
   ghiChu NVARCHAR(255),
   FOREIGN KEY (maPN) REFERENCES PhieuNhap(maPN),
-  FOREIGN KEY (maSP) REFERENCES SanPham(maSP),
-  FOREIGN KEY (maNVL) REFERENCES NguyenVatLieu(maNVL)
 );
 
 CREATE TABLE ChiTietPhieuXuat
@@ -154,7 +151,5 @@ CREATE TABLE ChiTietPhieuXuat
   MaNVL INT,
   soLuong INT,
   ghiChu NVARCHAR(255),
-  FOREIGN KEY (maPX) REFERENCES PhieuXuat(maPX),
-  FOREIGN KEY (maSP) REFERENCES SanPham(maSP),
-  FOREIGN KEY (maNVL) REFERENCES NguyenVatLieu(maNVL)
+  FOREIGN KEY (maPX) REFERENCES PhieuXuat(maPX)
 );

@@ -26,8 +26,13 @@ import {
   checkLogin,
   register,
   createRegister,
-  getUserByID,
-  updateUserByID
+  getEmployeeByID,
+  updateEmployeeByID,
+  deleteEmployeeByID,
+  createEmployee,
+  getAllEmployee,
+  getAllDepartment,
+  getAllPosition,
 } from "./controller.js";
 
 const router = express.Router();
@@ -77,7 +82,17 @@ router.post("/auth/login", checkLogin);
 router.post("/auth/register", register);
 router.post("/auth/create-register", createRegister);
 router.post("/auth/update-password", updatePassword);
-router.post("/user", getUserByID);
-router.post("/user/update", updateUserByID);
+
+router.post("/employee", getEmployeeByID);
+router.post("/employee/all", getAllEmployee);
+router.post("/employee/update", updateEmployeeByID);
+router.post("/employee/create", createEmployee);
+router.post("/employee/delete", deleteEmployeeByID);
+
+// Position
+router.post("/position/all", getAllPosition);
+
+// Department
+router.post("/department/all", getAllDepartment);
 
 export default router;

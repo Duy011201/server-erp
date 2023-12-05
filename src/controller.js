@@ -339,7 +339,7 @@ export const updateWarehouseReceiptDetailByID = (req, res) => {
 // Auth
 export const checkLogin = (req, res) => {
   const queryCondition =
-    `SELECT ac.maTK as id, ac.tenTK, ac.maQuyen, rl.quyen FROM ${constant.tableNameBD.ACCOUNT} as ac` +
+    `SELECT ac.maTK as id, ac.tenTK, ac.maQuyen, rl.quyen FROM ${constant.tableNameBD.ACCOUNTS} as ac` +
     ` INNER JOIN ${constant.tableNameBD.ROLES} as rl ON rl.maQuyen = ac.maQuyen`;
 
   let querySearch = "";
@@ -351,27 +351,37 @@ export const checkLogin = (req, res) => {
     querySearch += ` AND ac.matKhau = '${req.body.password}'`;
   }
 
-  return getAll(res, constant.tableNameBD.ACCOUNT, queryCondition, querySearch);
+  return getAll(
+    res,
+    constant.tableNameBD.ACCOUNTS,
+    queryCondition,
+    querySearch
+  );
 };
 
 export const register = async (req, res) => {
-  const queryCondition = `SELECT * FROM ${constant.tableNameBD.ACCOUNT} as ac`;
+  const queryCondition = `SELECT * FROM ${constant.tableNameBD.ACCOUNTS} as ac`;
   let querySearch = "";
   if (req.body.email && req.body.email !== "") {
     querySearch += ` WHERE ac.tenTK = '${req.body.email}'`;
   }
 
-  return getAll(res, constant.tableNameBD.ACCOUNT, queryCondition, querySearch);
+  return getAll(
+    res,
+    constant.tableNameBD.ACCOUNTS,
+    queryCondition,
+    querySearch
+  );
 };
 
 export const createRegister = async (req, res) => {
   const newUser = {
     tenTK: req.body.email,
     matKhau: req.body.password,
-    maQuyen: constant.role.EMPLOYEE,
+    maQuyen: constant.role.EMPLOYEES,
   };
 
-  return create(req, res, constant.tableNameBD.ACCOUNT, newUser);
+  return create(req, res, constant.tableNameBD.ACCOUNTS, newUser);
 };
 
 export const updatePassword = (req, res) => {
@@ -386,20 +396,20 @@ export const updatePassword = (req, res) => {
   return update(
     req,
     res,
-    constant.tableNameBD.ACCOUNT,
+    constant.tableNameBD.ACCOUNTS,
     updateUser,
     updateColumns
   );
 };
 
-// User
-export const getUserByID = (req, res) => {
-  const queryCondition = `SELECT nv.maNV as id, nv.hoTen, nv.soCCCD, nv.diaChi, nv.gioiTinh, nv.maChucVu, nv.maPhongBan FROM ${constant.tableNameBD.EMPLOYEE} as nv`;
-  return getByID(req, res, constant.tableNameBD.EMPLOYEE, queryCondition);
+// Employee
+export const getEmployeeByID = (req, res) => {
+  const queryCondition = `SELECT nv.maNV as id, nv.hoTen, nv.soCCCD, nv.diaChi, nv.gioiTinh, nv.maChucVu, nv.maPhongBan FROM ${constant.tableNameBD.EMPLOYEES} as nv`;
+  return getByID(req, res, constant.tableNameBD.EMPLOYEES, queryCondition);
 };
 
-export const updateUserByID = (req, res) => {
-  const updateUser = {
+export const updateEmployeeByID = (req, res) => {
+  const updateEmployee = {
     hoTen: req.body.hoTen,
     gioiTinh: req.body.gioiTinh,
     ngaySinh: new Date(),
@@ -416,8 +426,67 @@ export const updateUserByID = (req, res) => {
   return update(
     req,
     res,
-    constant.tableNameBD.EMPLOYEE,
-    updateUser,
+    constant.tableNameBD.EMPLOYEES,
+    updateEmployee,
     updateColumns
+  );
+};
+
+export const deleteEmployeeByID = (req, res) => {
+  const deleteColumns = {
+    maNV: req.query.id,
+  };
+  return deleteByID(req, res, constant.tableNameBD.EMPLOYEES, deleteColumns);
+};
+
+export const createEmployee = (req, res) => {
+  const newEmployee = {
+    hoTen: req.body.hoTen,
+    gioiTinh: req.body.gioiTinh,
+    ngaySinh: new Date(),
+    diaChi: req.body.diaChi,
+    soCCCD: req.body.soCCCD,
+    maChucVu: req.body.maChucVu,
+    maPhongBan: req.body.maPhongBan,
+  };
+
+  return create(req, res, constant.tableNameBD.EMPLOYEES, newEmployee);
+};
+
+export const getAllEmployee = (req, res) => {
+  const queryCondition = `SELECT nv.maNV as id, nv.hoTen , nv.gioiTinh, nv.ngaySinh, nv.diaChi, nv.soCCCD, nv.maChucVu, nv.maPhongBan FROM ${constant.tableNameBD.EMPLOYEES} as nv`;
+  let querySearch = "";
+
+  return getAll(
+    res,
+    constant.tableNameBD.EMPLOYEES,
+    queryCondition,
+    querySearch
+  );
+};
+
+// Position
+export const getAllPosition = (req, res) => {
+  const queryCondition = `SELECT dp.maChucVu as id, dp.tenChucVu , dp.trangThai, dp.maPhongBan FROM ${constant.tableNameBD.POSITIONS} as dp`;
+  let querySearch = "";
+
+  return getAll(
+    res,
+    constant.tableNameBD.POSITIONS,
+    queryCondition,
+    querySearch
+  );
+};
+
+// Department
+export const getAllDepartment = (req, res) => {
+  const queryCondition = `SELECT ps.maPhongBan as id, ps.tenPhongBan , ps.diaChi, ps.soDienThoai, ps.email FROM ${constant.tableNameBD.DEPARTMENTS} as ps`;
+  let querySearch = "";
+
+  return getAll(
+    res,
+    constant.tableNameBD.DEPARTMENTS,
+    queryCondition,
+    querySearch
   );
 };
