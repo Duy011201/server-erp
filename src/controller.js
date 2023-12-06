@@ -81,7 +81,7 @@ export const getAllProduct = (req, res) => {
 };
 
 export const getProductByID = (req, res) => {
-  const queryCondition = "";
+  const queryCondition = `SELECT pd.maSP as id, pd.tenSP, pd.loaiSP, pd.donViTinh, pd.soLuong, pd.maKho, pd.gia FROM ${constant.tableNameBD.PRODUCTS} as pd`;
   return getByID(req, res, constant.tableNameBD.PRODUCTS, queryCondition);
 };
 
@@ -142,7 +142,7 @@ export const getAllMaterial = (req, res) => {
 };
 
 export const getMaterialByID = (req, res) => {
-  const queryCondition = "";
+  const queryCondition = `SELECT mt.maNVL as id, mt.tenNVL, mt.donViTinh, mt.soLuong, mt.maKho, mt.gia FROM ${constant.tableNameBD.MATERIALS} as mt`;
   return getByID(req, res, constant.tableNameBD.MATERIALS, queryCondition);
 };
 
@@ -454,7 +454,9 @@ export const createEmployee = (req, res) => {
 };
 
 export const getAllEmployee = (req, res) => {
-  const queryCondition = `SELECT nv.maNV as id, nv.hoTen , nv.gioiTinh, nv.ngaySinh, nv.diaChi, nv.soCCCD, nv.maChucVu, nv.maPhongBan FROM ${constant.tableNameBD.EMPLOYEES} as nv`;
+  let queryCondition = `SELECT nv.maNV as id, nv.hoTen , nv.gioiTinh, nv.ngaySinh, nv.diaChi, nv.soCCCD, nv.maChucVu, nv.maPhongBan, ps.tenChucVu, dp.tenPhongBan FROM ${constant.tableNameBD.EMPLOYEES} as nv`;
+  queryCondition += ` INNER JOIN ${constant.tableNameBD.POSITIONS} as ps ON ps.maChucVu = nv.maChucVu`;
+  queryCondition += ` INNER JOIN ${constant.tableNameBD.DEPARTMENTS} as dp ON dp.maPhongBan = nv.maPhongBan`;
   let querySearch = "";
 
   return getAll(
@@ -467,12 +469,12 @@ export const getAllEmployee = (req, res) => {
 
 // RewardDiscipline
 export const getRewardDisciplineByID = (req, res) => {
-  const queryCondition = `SELECT ktkl.maKTKL as id,nv.hoTen, ktkl.maNV, ktkl.hinhThuc, ktkl.lyDo, ktkl.ngayKTKL FROM ${constant.tableNameBD.REWARD_DISCIPLINE} as ktkl`;
+  const queryCondition = `SELECT ktkl.maKTKL as id,nv.hoTen, ktkl.maNV, ktkl.hinhThuc, ktkl.lyDo, ktkl.ngayKTKL FROM ${constant.tableNameBD.REWARD_DISCIPLINES} as ktkl`;
   queryCondition += ` INNER JOIN ${constant.tableNameBD.EMPLOYEES} as nv ON nv.maNV = ktkl.maNV`;
   return getByID(
     req,
     res,
-    constant.tableNameBD.REWARD_DISCIPLINE,
+    constant.tableNameBD.REWARD_DISCIPLINES,
     queryCondition
   );
 };
@@ -492,7 +494,7 @@ export const updateRewardDisciplineByID = (req, res) => {
   return update(
     req,
     res,
-    constant.tableNameBD.REWARD_DISCIPLINE,
+    constant.tableNameBD.REWARD_DISCIPLINES,
     updateRewardDiscipline,
     updateColumns
   );
@@ -505,7 +507,7 @@ export const deleteRewardDisciplineByID = (req, res) => {
   return deleteByID(
     req,
     res,
-    constant.tableNameBD.REWARD_DISCIPLINE,
+    constant.tableNameBD.REWARD_DISCIPLINES,
     deleteColumns
   );
 };
@@ -521,19 +523,19 @@ export const createRewardDiscipline = (req, res) => {
   return create(
     req,
     res,
-    constant.tableNameBD.REWARD_DISCIPLINE,
+    constant.tableNameBD.REWARD_DISCIPLINES,
     newRewardDiscipline
   );
 };
 
 export const getAllRewardDiscipline = (req, res) => {
-  let queryCondition = `SELECT ktkl.maKTKL as id, ktkl.maNV, ktkl.hinhThuc, ktkl.lyDo, ktkl.ngayKTKL, nv.hoTen FROM ${constant.tableNameBD.REWARD_DISCIPLINE} as ktkl`;
+  let queryCondition = `SELECT ktkl.maKTKL as id, ktkl.maNV, ktkl.hinhThuc, ktkl.lyDo, ktkl.ngayKTKL, nv.hoTen FROM ${constant.tableNameBD.REWARD_DISCIPLINES} as ktkl`;
   queryCondition += ` INNER JOIN ${constant.tableNameBD.EMPLOYEES} as nv ON nv.maNV = ktkl.maNV`;
   let querySearch = "";
 
   return getAll(
     res,
-    constant.tableNameBD.REWARD_DISCIPLINE,
+    constant.tableNameBD.REWARD_DISCIPLINES,
     queryCondition,
     querySearch
   );
@@ -562,5 +564,152 @@ export const getAllDepartment = (req, res) => {
     constant.tableNameBD.DEPARTMENTS,
     queryCondition,
     querySearch
+  );
+};
+
+// Warehouse exports
+export const getAllWarehouseExport = (req, res) => {
+  const queryCondition = `SELECT px.maPX as id, px.maNV, px.ngayXuat, px.ghiChu FROM ${constant.tableNameBD.WAREHOUSE_EXPORTS} as px`;
+  let querySearch = "";
+
+  return getAll(
+    res,
+    constant.tableNameBD.WAREHOUSE_EXPORTS,
+    queryCondition,
+    querySearch
+  );
+};
+
+export const getWarehouseExportByID = (req, res) => {
+  const queryCondition = "";
+  return getByID(
+    req,
+    res,
+    constant.tableNameBD.WAREHOUSE_EXPORTS,
+    queryCondition
+  );
+};
+
+export const deleteWarehouseExportByID = (req, res) => {
+  const deleteColumns = {
+    maPN: req.query.id,
+  };
+  return deleteByID(
+    req,
+    res,
+    constant.tableNameBD.WAREHOUSE_EXPORTS,
+    deleteColumns
+  );
+};
+
+export const createWarehouseExport = (req, res) => {
+  const newWarehouseExport = {
+    maNV: req.body.maNV,
+    ngayXuat: new Date(),
+    ghiChu: req.body.ghiChu,
+  };
+
+  return create(
+    req,
+    res,
+    constant.tableNameBD.WAREHOUSE_EXPORTS,
+    newWarehouseExport
+  );
+};
+
+export const updateWarehouseExportByID = (req, res) => {
+  const updateWarehouseExport = {
+    maNV: req.body.maNV,
+    ngayXuat: new Date(req.body.ngayNhap),
+    ghiChu: req.body.ghiChu,
+  };
+
+  const updateColumns = {
+    maPX: req.body.id,
+  };
+
+  return update(
+    req,
+    res,
+    constant.tableNameBD.WAREHOUSE_EXPORTS,
+    updateWarehouseExport,
+    updateColumns
+  );
+};
+
+// Warehouse Export Detail
+export const getAllWarehouseExportDetail = (req, res) => {
+  const queryCondition = `SELECT ctpx.maCTPX as id, ctpx.maPX , ctpx.maSP, ctpx.maNVL, ctpx.soLuong, ctpx.ghiChu FROM ${constant.tableNameBD.WAREHOUSE_EXPORT_DETAILS} as ctpx`;
+  let querySearch = "";
+  if (req.body.warehouseExportID && req.body.warehouseExportID !== "") {
+    querySearch += ` WHERE ctpx.maPX = ${req.body.warehouseExportID}`;
+  }
+
+  return getAll(
+    res,
+    constant.tableNameBD.WAREHOUSE_EXPORT_DETAILS,
+    queryCondition,
+    querySearch
+  );
+};
+
+export const getWarehouseExportDetailByID = (req, res) => {
+  const queryCondition = "";
+  return getByID(
+    req,
+    res,
+    constant.tableNameBD.WAREHOUSE_EXPORT_DETAILS,
+    queryCondition
+  );
+};
+
+export const deleteWarehouseExportDetailByID = (req, res) => {
+  const deleteColumns = {
+    maCTPX: req.query.id,
+  };
+  return deleteByID(
+    req,
+    res,
+    constant.tableNameBD.WAREHOUSE_EXPORT_DETAILS,
+    deleteColumns
+  );
+};
+
+export const createWarehouseExportDetail = (req, res) => {
+  const newWarehouseExportDetail = {
+    maPX: req.body.maPX,
+    maSP: req.body.maSP,
+    maNVL: req.body.maNVL,
+    soLuong: req.body.soLuong,
+    ghiChu: req.body.ghiChu,
+  };
+
+  return create(
+    req,
+    res,
+    constant.tableNameBD.WAREHOUSE_EXPORT_DETAILS,
+    newWarehouseExportDetail
+  );
+};
+
+export const updateWarehouseExportDetailByID = (req, res) => {
+  const updateWarehouseExportDetail = {
+    maPX: req.body.maPX,
+    maSP: req.body.maSP,
+    maNVL: req.body.maNVL,
+    soLuong: parseInt(req.body.soLuong),
+    ghiChu: req.body.ghiChu,
+  };
+
+  const updateColumns = {
+    maCTPX: req.body.id,
+  };
+
+  return update(
+    req,
+    res,
+    constant.tableNameBD.WAREHOUSE_EXPORT_DETAILS,
+    updateWarehouseExportDetail,
+    updateColumns
   );
 };

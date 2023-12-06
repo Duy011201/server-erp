@@ -29,11 +29,13 @@ const constant = {
     MATERIALS: "nguyenvatlieu",
     WAREHOUSE_RECEIPTS: "phieunhap",
     WAREHOUSE_RECEIPT_DETAILS: "chitietphieunhap",
+    WAREHOUSE_EXPORTS: "phieuxuat",
+    WAREHOUSE_EXPORT_DETAILS: "chitietphieuxuat",
     ACCOUNTS: "taikhoan",
     EMPLOYEES: "nhanvien",
     DEPARTMENTS: "phongban",
     POSITIONS: "chucvu",
-    REWARD_DISCIPLINE: 'khenthuongkyluat'
+    REWARD_DISCIPLINES: "khenthuongkyluat",
   },
 };
 

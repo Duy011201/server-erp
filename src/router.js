@@ -10,10 +10,12 @@ import {
   updateProductByID,
   createProduct,
   getAllProduct,
+  getProductByID,
   deleteMaterialByID,
   updateMaterialByID,
   createMaterial,
   getAllMaterial,
+  getMaterialByID,
   getAllWarehouseReceipt,
   createWarehouseReceipt,
   updateWarehouseReceiptByID,
@@ -38,6 +40,14 @@ import {
   updateRewardDisciplineByID,
   getAllRewardDiscipline,
   getRewardDisciplineByID,
+  getAllWarehouseExport,
+  createWarehouseExport,
+  updateWarehouseExportByID,
+  deleteWarehouseExportByID,
+  getAllWarehouseExportDetail,
+  createWarehouseExportDetail,
+  updateWarehouseExportDetailByID,
+  deleteWarehouseExportDetailByID,
 } from "./controller.js";
 
 const router = express.Router();
@@ -57,12 +67,14 @@ router.post("/product/all", getAllProduct);
 router.post("/product/create", createProduct);
 router.post("/product/update", updateProductByID);
 router.post("/product/delete", deleteProductByID);
+router.post("/product", getProductByID);
 
 // material
 router.post("/material/all", getAllMaterial);
 router.post("/material/create", createMaterial);
 router.post("/material/update", updateMaterialByID);
 router.post("/material/delete", deleteMaterialByID);
+router.post("/material", getMaterialByID);
 
 // warehouse receipt
 router.post("/warehouse-receipt/all", getAllWarehouseReceipt);
@@ -81,6 +93,18 @@ router.post(
   "/warehouse-receipt-detail/delete",
   deleteWarehouseReceiptDetailByID
 );
+
+// warehouse export
+router.post("/warehouse-export/all", getAllWarehouseExport);
+router.post("/warehouse-export/create", createWarehouseExport);
+router.post("/warehouse-export/update", updateWarehouseExportByID);
+router.post("/warehouse-export/delete", deleteWarehouseExportByID);
+
+// warehouse export details
+router.post("/warehouse-export-detail/all", getAllWarehouseExportDetail);
+router.post("/warehouse-export-detail/create", createWarehouseExportDetail);
+router.post("/warehouse-export-detail/update", updateWarehouseExportDetailByID);
+router.post("/warehouse-export-detail/delete", deleteWarehouseExportDetailByID);
 
 // Auth
 router.post("/auth/login", checkLogin);
