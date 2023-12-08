@@ -569,7 +569,7 @@ export const getAllDepartment = (req, res) => {
 
 // Warehouse exports
 export const getAllWarehouseExport = (req, res) => {
-  const queryCondition = `SELECT px.maPX as id, px.maNV, px.ngayXuat, px.ghiChu FROM ${constant.tableNameBD.WAREHOUSE_EXPORTS} as px`;
+  const queryCondition = `SELECT px.maPX as id, px.maNV, px.ngayXuat, px.loaiHang, px.ghiChu FROM ${constant.tableNameBD.WAREHOUSE_EXPORTS} as px`;
   let querySearch = "";
 
   return getAll(
@@ -592,7 +592,7 @@ export const getWarehouseExportByID = (req, res) => {
 
 export const deleteWarehouseExportByID = (req, res) => {
   const deleteColumns = {
-    maPN: req.query.id,
+    maPX: req.query.id,
   };
   return deleteByID(
     req,
@@ -605,6 +605,7 @@ export const deleteWarehouseExportByID = (req, res) => {
 export const createWarehouseExport = (req, res) => {
   const newWarehouseExport = {
     maNV: req.body.maNV,
+    loaiHang: req.body.loaiHang,
     ngayXuat: new Date(),
     ghiChu: req.body.ghiChu,
   };
@@ -620,7 +621,8 @@ export const createWarehouseExport = (req, res) => {
 export const updateWarehouseExportByID = (req, res) => {
   const updateWarehouseExport = {
     maNV: req.body.maNV,
-    ngayXuat: new Date(req.body.ngayNhap),
+    loaiHang: req.body.loaiHang,
+    ngayXuat: new Date(req.body.ngayXuat),
     ghiChu: req.body.ghiChu,
   };
 
