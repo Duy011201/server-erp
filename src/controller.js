@@ -642,10 +642,7 @@ export const updateWarehouseExportByID = (req, res) => {
 // Warehouse Export Detail
 export const getAllWarehouseExportDetail = (req, res) => {
   const queryCondition = `SELECT ctpx.maCTPX as id, ctpx.maPX , ctpx.maSP, ctpx.maNVL, ctpx.soLuong, ctpx.ghiChu FROM ${constant.tableNameBD.WAREHOUSE_EXPORT_DETAILS} as ctpx`;
-  let querySearch = "";
-  if (req.body.warehouseExportID && req.body.warehouseExportID !== "") {
-    querySearch += ` WHERE ctpx.maPX = ${req.body.warehouseExportID}`;
-  }
+  let querySearch = ` WHERE ctpx.maPX = ${req.body.warehouseExportID}`;
 
   return getAll(
     res,
