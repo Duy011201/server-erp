@@ -162,7 +162,7 @@ export const create = (req, res, tableName, newData) => {
 
       return res.json({
         status: constant.code.OK,
-        message: constant.msg.CREATE_SUCCESS,
+        msg: constant.msg.CREATE_SUCCESS,
         newDataId: result.insertId,
       });
     }

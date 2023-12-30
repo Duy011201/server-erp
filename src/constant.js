@@ -13,14 +13,15 @@ const constant = {
     SERVER_ERROR: 500,
   },
   statusStore: {
-    EMPTY: "Empty",
-    FULL: "Full",
-    IN_USE: "In Use",
+    EMPTY: "EMPTY",
+    FULL: "FULL",
+    IN_USE: "IN_USE",
   },
   role: {
-    EMPLOYEE: "employee",
-    MANAGER: "manager",
-    ADMIN: "admin",
+    ADMIN: {code: 1, name:"ADMIN"},
+    EMPLOYEE: {code: 2, name:"EMPLOYEE"},
+    STORE:  {code: 3, name:"STORE"},
+    USER:  {code: 4, name:"USER"},
   },
   tableNameBD: {
     ROLES: "phanquyen",
