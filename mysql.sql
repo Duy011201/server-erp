@@ -141,7 +141,7 @@ CREATE TABLE ChiTietPhieuNhap
   MaNVL INT,
   soLuong INT,
   ghiChu NVARCHAR(255),
-  FOREIGN KEY (maPN) REFERENCES PhieuNhap(maPN),
+  FOREIGN KEY (maPN) REFERENCES PhieuNhap(maPN)
 );
 
 CREATE TABLE ChiTietPhieuXuat
