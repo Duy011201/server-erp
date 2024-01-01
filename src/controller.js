@@ -42,7 +42,7 @@ export const getStoreByID = (req, res) => {
 
   const data = {
     maKho: req.query.id,
-  }
+  };
 
   return getByID(req, res, constant.tableNameBD.STORES, queryCondition, data);
 };
@@ -88,7 +88,9 @@ export const updateStoreByID = (req, res) => {
 
 // Product
 export const getAllProduct = (req, res) => {
-  const queryCondition = `SELECT pd.maSP as id, pd.tenSP, pd.loaiSP, pd.donViTinh, pd.soLuong, pd.maKho, pd.gia FROM ${constant.tableNameBD.PRODUCTS} as pd`;
+  const queryCondition =
+    `SELECT pd.maSP as id, pd.tenSP, pd.loaiSP, pd.donViTinh, pd.soLuong, pd.maKho, pd.gia, sp.tenKho FROM ${constant.tableNameBD.PRODUCTS} as pd` +
+    ` INNER JOIN ${constant.tableNameBD.STORES} as sp ON sp.maKho = pd.maKho`;
   let querySearch = "";
 
   return getAll(
@@ -101,7 +103,10 @@ export const getAllProduct = (req, res) => {
 
 export const getProductByID = (req, res) => {
   const queryCondition = `SELECT pd.maSP as id, pd.tenSP, pd.loaiSP, pd.donViTinh, pd.soLuong, pd.maKho, pd.gia FROM ${constant.tableNameBD.PRODUCTS} as pd`;
-  return getByID(req, res, constant.tableNameBD.PRODUCTS, queryCondition);
+  const data = {
+    maSP: req.query.id,
+  };
+  return getByID(req, res, constant.tableNameBD.PRODUCTS, queryCondition, data);
 };
 
 export const deleteProductByID = (req, res) => {
@@ -162,7 +167,16 @@ export const getAllMaterial = (req, res) => {
 
 export const getMaterialByID = (req, res) => {
   const queryCondition = `SELECT mt.maNVL as id, mt.tenNVL, mt.donViTinh, mt.soLuong, mt.maKho, mt.gia FROM ${constant.tableNameBD.MATERIALS} as mt`;
-  return getByID(req, res, constant.tableNameBD.MATERIALS, queryCondition);
+  const data = {
+    maNVL: req.query.id,
+  };
+  return getByID(
+    req,
+    res,
+    constant.tableNameBD.MATERIALS,
+    queryCondition,
+    data
+  );
 };
 
 export const deleteMaterialByID = (req, res) => {
@@ -221,11 +235,15 @@ export const getAllWarehouseReceipt = (req, res) => {
 
 export const getWarehouseReceiptByID = (req, res) => {
   const queryCondition = "";
+  const data = {
+    maPN: req.query.id,
+  };
   return getByID(
     req,
     res,
     constant.tableNameBD.WAREHOUSE_RECEIPTS,
-    queryCondition
+    queryCondition,
+    data
   );
 };
 
@@ -282,9 +300,7 @@ export const updateWarehouseReceiptByID = (req, res) => {
 export const getAllWarehouseReceiptDetail = (req, res) => {
   const queryCondition = `SELECT ctpn.maCTPN as id, ctpn.maPN , ctpn.maSP, ctpn.maNVL, ctpn.soLuong, ctpn.ghiChu FROM ${constant.tableNameBD.WAREHOUSE_RECEIPT_DETAILS} as ctpn`;
   let querySearch = "";
-  if (req.body.warehouseReceiptID && req.body.warehouseReceiptID !== "") {
-    querySearch += ` WHERE ctpn.maPN = ${req.body.warehouseReceiptID}`;
-  }
+  querySearch += ` WHERE ctpn.maPN = ${req.body.warehouseReceiptID}`;
 
   return getAll(
     res,
@@ -296,11 +312,15 @@ export const getAllWarehouseReceiptDetail = (req, res) => {
 
 export const getWarehouseReceiptDetailByID = (req, res) => {
   const queryCondition = "";
+  const data = {
+    maCTPN: req.query.id,
+  };
   return getByID(
     req,
     res,
     constant.tableNameBD.WAREHOUSE_RECEIPT_DETAILS,
-    queryCondition
+    queryCondition,
+    data
   );
 };
 
@@ -425,7 +445,16 @@ export const updatePassword = (req, res) => {
 // Employee
 export const getEmployeeByID = (req, res) => {
   const queryCondition = `SELECT nv.maNV as id, nv.hoTen, nv.soCCCD, nv.diaChi, nv.gioiTinh, nv.maChucVu, nv.maPhongBan FROM ${constant.tableNameBD.EMPLOYEES} as nv`;
-  return getByID(req, res, constant.tableNameBD.EMPLOYEES, queryCondition);
+  const data = {
+    maNV: req.query.id,
+  };
+  return getByID(
+    req,
+    res,
+    constant.tableNameBD.EMPLOYEES,
+    queryCondition,
+    data
+  );
 };
 
 export const updateEmployeeByID = (req, res) => {
@@ -491,11 +520,15 @@ export const getAllEmployee = (req, res) => {
 export const getRewardDisciplineByID = (req, res) => {
   const queryCondition = `SELECT ktkl.maKTKL as id,nv.hoTen, ktkl.maNV, ktkl.hinhThuc, ktkl.lyDo, ktkl.ngayKTKL FROM ${constant.tableNameBD.REWARD_DISCIPLINES} as ktkl`;
   queryCondition += ` INNER JOIN ${constant.tableNameBD.EMPLOYEES} as nv ON nv.maNV = ktkl.maNV`;
+  const data = {
+    maKTKL: req.query.id,
+  };
   return getByID(
     req,
     res,
     constant.tableNameBD.REWARD_DISCIPLINES,
-    queryCondition
+    queryCondition,
+    data
   );
 };
 
@@ -602,11 +635,15 @@ export const getAllWarehouseExport = (req, res) => {
 
 export const getWarehouseExportByID = (req, res) => {
   const queryCondition = "";
+  const data = {
+    maCTPX: req.query.id,
+  };
   return getByID(
     req,
     res,
     constant.tableNameBD.WAREHOUSE_EXPORTS,
-    queryCondition
+    queryCondition,
+    data
   );
 };
 
@@ -674,11 +711,15 @@ export const getAllWarehouseExportDetail = (req, res) => {
 
 export const getWarehouseExportDetailByID = (req, res) => {
   const queryCondition = "";
+  const data = {
+    maCTPX: req.query.id,
+  };
   return getByID(
     req,
     res,
     constant.tableNameBD.WAREHOUSE_EXPORT_DETAILS,
-    queryCondition
+    queryCondition,
+    data
   );
 };
 
