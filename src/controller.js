@@ -376,6 +376,7 @@ export const register = async (req, res) => {
 
 export const createRegister = async (req, res) => {
   const newUser = {
+    maNV: req.body.maNV,
     tenTK: req.body.email,
     matKhau: req.body.password,
     maQuyen: constant.role.USER.code,
