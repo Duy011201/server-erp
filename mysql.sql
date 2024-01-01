@@ -1,5 +1,8 @@
+
+-- SETUP DATABASE
 CREATE DATABASE erp;
 
+-- SETUP TABLE
 CREATE TABLE PhongBan
 (
   maPhongBan INT AUTO_INCREMENT PRIMARY KEY,
@@ -153,3 +156,19 @@ CREATE TABLE ChiTietPhieuXuat
   ghiChu NVARCHAR(255),
   FOREIGN KEY (maPX) REFERENCES PhieuXuat(maPX)
 );
+
+-- SETUP BASE DATA TABLE
+INSERT INTO PhongBan (tenPhongBan, diaChi, soDienThoai, email)
+VALUES
+  ('NULL', 'diachi', '0123456789', 'phongban@example.com')
+
+INSERT INTO ChucVu (tenChucVu, trangThai, maPhongBan)
+VALUES
+  ('EMPLOYEE', 'ACTIVE', 1)
+
+INSERT INTO PhanQuyen (quyen, ghiChu)
+VALUES
+  ('ADMIN', 'Quản trị hệ thống'),
+  ('EMPLOYEE', 'Quản trị nhân viên hệ thống'),
+  ('STORE', 'Quản trị kho hệ thống'),
+  ('USER', 'Người dùng hệ thống')
