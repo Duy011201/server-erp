@@ -160,23 +160,24 @@ CREATE TABLE ChiTietPhieuXuat
 -- SETUP BASE DATA TABLE
 INSERT INTO PhongBan (tenPhongBan, diaChi, soDienThoai, email)
 VALUES
-  ('NULL', 'diachi', '0123456789', 'admin@example.com')
+  ('NULL', 'diachi', '0123456789', 'phongban@example.com');
 
 INSERT INTO ChucVu (tenChucVu, trangThai, maPhongBan)
 VALUES
-  ('ADMIN', 'ACTIVE', 1)
+  ('ADMIN', 'ACTIVE', 1),
+  ('USER', 'ACTIVE', 1);
 
 INSERT INTO PhanQuyen (quyen, ghiChu)
 VALUES
   ('ADMIN', 'Quản trị hệ thống'),
   ('EMPLOYEE', 'Quản trị nhân viên hệ thống'),
   ('STORE', 'Quản trị kho hệ thống'),
-  ('USER', 'Người dùng hệ thống')
+  ('USER', 'Người dùng hệ thống');
 
 INSERT INTO NhanVien (hoTen, maChucVu, maPhongBan)
 VALUES
-  ('ADMIN', 1, 1)
+  ('ADMIN', 1, 1);
 
 INSERT INTO TaiKhoan (tenTK, matKhau, maQuyen)
 VALUES
-  ('admin@gmail.com', 'admin', 1)
+  ('admin@gmail.com', 'admin', 1);
