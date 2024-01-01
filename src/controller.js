@@ -25,7 +25,26 @@ export const getAllStore = (req, res) => {
 
 export const getStoreByID = (req, res) => {
   const queryCondition = "";
-  return getByID(req, res, constant.tableNameBD.STORES, queryCondition);
+
+  if (
+    req.query.id === undefined ||
+    req.query.id === null ||
+    req.query.id === ""
+  ) {
+    console.error(`Error querying get by id table name ${tableName}`);
+    res.status(constant.code.SERVER_ERROR).json({
+      status: constant.code.SERVER_ERROR,
+      query: `Error querying get by id table name ${tableName}`,
+      msg: constant.msg.SERVER_ERROR,
+    });
+    return;
+  }
+
+  const data = {
+    maKho: req.query.id,
+  }
+
+  return getByID(req, res, constant.tableNameBD.STORES, queryCondition, data);
 };
 
 export const deleteStoreByID = (req, res) => {

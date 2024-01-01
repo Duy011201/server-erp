@@ -6,6 +6,7 @@ import {
   deleteStoreByID,
   updateStoreByID,
   createStore,
+  getStoreByID,
   deleteProductByID,
   updateProductByID,
   createProduct,
@@ -61,6 +62,7 @@ router.post("/store/all", getAllStore);
 router.post("/store/create", createStore);
 router.post("/store/update", updateStoreByID);
 router.post("/store/delete", deleteStoreByID);
+router.post("/store", getStoreByID);
 
 // product
 router.post("/product/all", getAllProduct);

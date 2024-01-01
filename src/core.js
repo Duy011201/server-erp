@@ -53,16 +53,16 @@ export const getAll = (res, tableName, queryCondition, querySearch) => {
   });
 };
 
-export const getByID = (req, res, tableName, queryCondition) => {
+export const getByID = (req, res, tableName, queryCondition, data) => {
   if (
-    req.query.id === undefined ||
-    req.query.id === null ||
-    req.query.id === ""
+    Object.values(data)[0] === undefined ||
+    Object.values(data)[0] === null ||
+    Object.values(data)[0] === ""
   ) {
-    console.error(`Error querying get by id table name ${tableName}`);
+    console.error(`Error querying delete by id table name ${tableName}`);
     res.status(constant.code.SERVER_ERROR).json({
       status: constant.code.SERVER_ERROR,
-      query: `Error querying get by id table name ${tableName}`,
+      query: `Error querying delete by id table name ${tableName}`,
       msg: constant.msg.SERVER_ERROR,
     });
     return;
@@ -74,7 +74,9 @@ export const getByID = (req, res, tableName, queryCondition) => {
     queryCondition === null ||
     queryCondition.length === 0
   ) {
-    query = `SELECT * FROM ${tableName} WHERE ${req.query.id}`;
+    query = `SELECT * FROM ${tableName} WHERE ${Object.keys(data)[0]} = ${
+      Object.values(data)[0]
+    }`;
   } else {
     query += queryCondition;
   }
