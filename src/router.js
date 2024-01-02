@@ -49,6 +49,21 @@ import {
   createWarehouseExportDetail,
   updateWarehouseExportDetailByID,
   deleteWarehouseExportDetailByID,
+  getPositionByID,
+  updatePositionByID,
+  createPosition,
+  deletePositionByID,
+  getAllPosition,
+  getAllDepartment,
+  getDepartmentByID,
+  updateDepartmentID,
+  createDepartment,
+  deleteDepartmentByID,
+  getAllworkingprocess,
+  getworkingprocessByID,
+  updateworkingprocessByID,
+  createworkingprocess,
+  deleteworkingprocessByID
 } from "./controller.js";
 
 const router = express.Router();
@@ -129,9 +144,24 @@ router.post("/reward-discipline/create", createRewardDiscipline);
 router.post("/reward-discipline/delete", deleteRewardDisciplineByID);
 
 // Position
+router.post("/position", getPositionByID);
 router.post("/position/all", getAllPosition);
+router.post("/position/update", updatePositionByID);
+router.post("/position", createPosition);
+router.post("/position/delete", deletePositionByID);
 
 // Department
+router.post("/department", getDepartmentByID);
 router.post("/department/all", getAllDepartment);
+router.post("/department/update", updateDepartmentID);
+router.post("/department", createDepartment);
+router.post("/department/delete", deleteDepartmentByID);
+
+// workingprocess
+router.post("/workingprocess", getworkingprocessByID);
+router.post("/workingprocess/all", getAllworkingprocess);
+router.post("/workingprocess/update", updateworkingprocessByID);
+router.post("/workingprocess", createworkingprocess);
+router.post("/workingprocess/delete", deleteworkingprocessByID);
 
 export default router;

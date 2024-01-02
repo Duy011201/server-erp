@@ -606,6 +606,64 @@ export const getAllPosition = (req, res) => {
     querySearch
   );
 };
+export const getPositionByID = (req, res) => {
+  const queryCondition = ``;
+  return getByID(
+    req,
+    res,
+    constant.tableNameBD.POSITIONS,
+    queryCondition
+  );
+};
+
+export const updatePositionByID = (req, res) => {
+  const updatePosition = {
+    maChucVu: req.body.maChucVu,
+    tenChucVu: req.body.tenChucVu,
+    trangThai: req.body.trangThai,
+    maPhongBan: req.body.maPhongBan
+  };
+
+  const updateColumns = {
+    maChucVu: req.body.id,
+  };
+
+  return update(
+    req,
+    res,
+    constant.tableNameBD.POSITIONS,
+    updatePosition,
+    updateColumns
+  );
+};
+
+export const deletePositionByID = (req, res) => {
+  const deleteColumns = {
+    maChucVu: req.query.id,
+  };
+  return deleteByID(
+    req,
+    res,
+    constant.tableNameBD.POSITIONS,
+    deleteColumns
+  );
+};
+
+export const createPosition = (req, res) => {
+  const newPosition = {
+    maChucVu: req.body.maChucVu,
+    tenChucVu: req.body.tenChucVu,
+    trangThai: req.body.trangThai,
+    maPhongBan: req.body.maPhongBan,
+  };
+
+  return create(
+    req,
+    res,
+    constant.tableNameBD.POSITIONS,
+    newPosition
+  );
+};
 
 // Department
 export const getAllDepartment = (req, res) => {
@@ -617,6 +675,65 @@ export const getAllDepartment = (req, res) => {
     constant.tableNameBD.DEPARTMENTS,
     queryCondition,
     querySearch
+  );
+};
+export const getDepartmentByID = (req, res) => {
+  const queryCondition = ``;
+  return getByID(
+    req,
+    res,
+    constant.tableNameBD.DEPARTMENTS,
+    queryCondition
+  );
+};;
+export const updateDepartmentID = (req, res) => {
+  const updateDepartment = {
+    maPhongBan: req.body.maPhongBan,
+    tenPhongBan: req.body.tenPhongBan,
+    diaChi: req.body.diaChi,
+    soDienThoai: req.body.soDienThoai,
+    email: req.body.email,
+  };
+
+  const updateColumns = {
+    maPhongBan: req.body.id,
+  };
+
+  return update(
+    req,
+    res,
+    constant.tableNameBD.DEPARTMENTS,
+    updateDepartment,
+    updateColumns
+  );
+};
+
+export const deleteDepartmentByID = (req, res) => {
+  const deleteColumns = {
+    maPhongBan: req.query.id,
+  };
+  return deleteByID(
+    req,
+    res,
+    constant.tableNameBD.DEPARTMENTS,
+    deleteColumns
+  );
+};
+
+export const createDepartment = (req, res) => {
+  const newDepartment = {
+    maPhongBan: req.body.maPhongBan,
+    tenPhongBan: req.body.tenPhongBan,
+    diaChi: req.body.diaChi,
+    soDienThoai: req.body.soDienThoai,
+    email: req.body.email,
+  };
+
+  return create(
+    req,
+    res,
+    constant.tableNameBD.DEPARTMENTS,
+    newDepartment
   );
 };
 
@@ -773,5 +890,85 @@ export const updateWarehouseExportDetailByID = (req, res) => {
     updateColumns
   );
 };
+//workingprocess
 
+export const getAllworkingprocess = (req, res) => {
+  const queryCondition = `SELECT wp.maQTCT as id, wp.maNV , wp.maCV, wp.ngayBatDau, wp.ngayKetThuc,
+  , wp.danhGia FROM ${constant.tableNameBD.WORKING_PROCESS} as wp`;
+  let querySearch = "";
+  if (req.body.workingprocessExportID && req.body.workingprocessExportID !== "") {
+    querySearch += ` WHERE wp.maQTCT = ${req.body.workingprocessExportID}`;
+  }
+
+  return getAll(
+    res,
+    constant.tableNameBD.WORKING_PROCESS,
+    queryCondition,
+    querySearch
+  );
+};
+
+export const getworkingprocessByID = (req, res) => {
+  const queryCondition = "";
+  return getByID(
+    req,
+    res,
+    constant.tableNameBD.WORKING_PROCESS,
+    queryCondition
+  );
+};
+
+export const deleteworkingprocessByID = (req, res) => {
+  const deleteColumns = {
+    maQTCT: req.query.id,
+  };
+  return deleteByID(
+    req,
+    res,
+    constant.tableNameBD.WORKING_PROCESS,
+    deleteColumns
+  );
+};
+
+export const createworkingprocess = (req, res) => {
+  const newworkingprocess = {
+    maQTCT: req.body.maQTCT,
+    maNV: req.body.maNV,
+    maCV: req.body.maCV,
+    ngayBatDau: req.body.ngayBatDau,
+    ngayKetThuc: req.body.ngayKetThuc,
+    danhGia: req.body.danhGia,
+
+  };
+
+  return create(
+    req,
+    res,
+    constant.tableNameBD.WORKING_PROCESS,
+    newworkingprocess
+  );
+};
+
+export const updateworkingprocessByID = (req, res) => {
+  const updateworkingprocess = {
+    maQTCT: req.body.maQTCT,
+    maNV: req.body.maNV,
+    maCV: req.body.maCV,
+    ngayBatDau: req.body.ngayBatDau,
+    ngayKetThuc: req.body.ngayKetThuc,
+    danhGia: req.body.danhGia,
+  };
+
+  const updateColumns = {
+    maQTCT: req.body.id,
+  };
+
+  return update(
+    req,
+    res,
+    constant.tableNameBD.WORKING_PROCESS,
+    updateworkingprocess,
+    updateColumns
+  );
+};
 //test
