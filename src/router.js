@@ -34,8 +34,6 @@ import {
   deleteEmployeeByID,
   createEmployee,
   getAllEmployee,
-  getAllDepartment,
-  getAllPosition,
   deleteRewardDisciplineByID,
   createRewardDiscipline,
   updateRewardDisciplineByID,
