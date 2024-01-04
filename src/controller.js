@@ -893,8 +893,7 @@ export const updateWarehouseExportDetailByID = (req, res) => {
 //workingprocess
 
 export const getAllworkingprocess = (req, res) => {
-  const queryCondition = `SELECT wp.maQTCT as id, wp.maNV , wp.maCV, wp.ngayBatDau, wp.ngayKetThuc,
-  , wp.danhGia FROM ${constant.tableNameBD.WORKING_PROCESS} as wp`;
+  const queryCondition = `SELECT wp.maQTCT as id, wp.maNV , wp.maCV, wp.ngayBatDau, wp.ngayKetThuc, wp.danhGia FROM ${constant.tableNameBD.WORKING_PROCESS} as wp`;
   let querySearch = "";
   if (req.body.workingprocessExportID && req.body.workingprocessExportID !== "") {
     querySearch += ` WHERE wp.maQTCT = ${req.body.workingprocessExportID}`;

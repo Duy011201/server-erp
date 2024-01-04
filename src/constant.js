@@ -37,6 +37,7 @@ const constant = {
     DEPARTMENTS: "phongban",
     POSITIONS: "chucvu",
     REWARD_DISCIPLINES: "khenthuongkyluat",
+    WORKING_PROCESS:"quatrinhcongtac",
   },
 };
 
