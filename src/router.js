@@ -51,8 +51,6 @@ import {
   updatePositionByID,
   createPosition,
   deletePositionByID,
-  getAllPosition,
-  getAllDepartment,
   getDepartmentByID,
   updateDepartmentID,
   createDepartment,
@@ -61,7 +59,9 @@ import {
   getworkingprocessByID,
   updateworkingprocessByID,
   createworkingprocess,
-  deleteworkingprocessByID
+  deleteworkingprocessByID,
+  getAllReportExport,
+  getAllReportReceipt,
 } from "./controller.js";
 
 const router = express.Router();
@@ -70,7 +70,7 @@ const router = express.Router();
 router.post("/role/all", getAllRole);
 router.post("/role/create", createRole);
 
-// Store
+// Report
 router.post("/store/all", getAllStore);
 router.post("/store/create", createStore);
 router.post("/store/update", updateStoreByID);
@@ -161,5 +161,9 @@ router.post("/workingprocess/all", getAllworkingprocess);
 router.post("/workingprocess/update", updateworkingprocessByID);
 router.post("/workingprocess", createworkingprocess);
 router.post("/workingprocess/delete", deleteworkingprocessByID);
+
+// report
+router.post("/report/receipt", getAllReportReceipt);
+router.post("/report/export", getAllReportExport);
 
 export default router;
